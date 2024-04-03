@@ -60,7 +60,7 @@ DATABASES = {
 # Local Server part starts
 
 # SECRET_KEY = 'django-insecure-sorfwj7jbssj)*x47!=$!fr6ac%1z)0+$!a9i2_yd@f27@f$4a'
-# DEBUG = True
+DEBUG = True
 # ALLOWED_HOSTS = []
 
 # Local server part ends.
@@ -68,7 +68,7 @@ DATABASES = {
 # Render postgres part starts
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = os.environ.get("DEBUG", "False").lower()== "true"
+# DEBUG = os.environ.get("DEBUG", "False").lower()== "true"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 database_url = os.environ.get("DATABASE_URL")
 DATABASES["default"] = dj_database_url.parse(database_url)
