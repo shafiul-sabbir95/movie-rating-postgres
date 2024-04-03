@@ -60,7 +60,7 @@ DATABASES = {
 # Local Server part starts
 
 # SECRET_KEY = 'django-insecure-sorfwj7jbssj)*x47!=$!fr6ac%1z)0+$!a9i2_yd@f27@f$4a'
-DEBUG = True
+# DEBUG = True
 # ALLOWED_HOSTS = []
 
 # Local server part ends.

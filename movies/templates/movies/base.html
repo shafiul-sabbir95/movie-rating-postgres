@@ -55,8 +55,10 @@
                 <a class="nav-item nav-link" href="{% url 'movie-create' %}">Upload Movie</a>
 
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                <img class="rounded-circle article-img" style="height: 45px; width: 45px" src="{{ user.profile.image.url }}">
-                  <form method="post" action="{% url 'logout' %}" class="nav-item">
+      
+                {% comment %} <img class="rounded-circle article-img" style="height: 45px; width: 45px" src="{{ user.profile.image.url }}"> {% endcomment %}
+                
+                <form method="post" action="{% url 'logout' %}" class="nav-item">
                     {% csrf_token %}
                     <button type="submit" class="nav-link btn btn-link">Logout</button>
                   </form>
