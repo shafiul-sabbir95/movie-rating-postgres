@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Movie, Rating
@@ -28,22 +29,25 @@ class MovieListView(ListView):
     paginate_by = 4
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Movies'
-        query = self.request.GET.get('search')
+        return super().get_context_data(**kwargs)
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Movies'
+    #     query = self.request.GET.get('search')
         
-        if query:
-            context['message'] = f'You searched for: "{query}". '
-            movies = Movie.objects.filter(Q(name__icontains=query)).order_by('-release_date')
-            if not movies:
-                context['message'] += f'No data found for "{query}"!'
-            context['movies'] = movies
-        else:
-            context['message'] = 'No search query provided'
-        return context
+    #     if query:
+    #         context['message'] = f'You searched for: "{query}". '
+    #         movies = Movie.objects.filter(Q(name__icontains=query)).order_by('-release_date')
+    #         if not movies:
+    #             context['message'] += f'No data found for "{query}"!'
+    #         context['movies'] = movies
+    #     else:
+    #         context['message'] = 'No search query provided'
+    #     return context
 
-    def get_queryset(self):
-        return Movie.objects.all().order_by('-release_date')
+    # def get_queryset(self):
+    #     return Movie.objects.all().order_by('-release_date')
 
 
     
