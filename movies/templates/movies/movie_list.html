@@ -10,9 +10,9 @@
     
     {% for movie in movies %}
         <article class="media content-section">
-            {% comment %} {% if movie.author.profile.image.url %}
+            {% if movie.author.profile.image.url %}
             <img class="rounded-circle article-img" src="{{ movie.author.profile.image.url }}" style="float: left;">
-            {% endif %} {% endcomment %}
+            {% endif %}
             <div class="media-body" >
                 <div class="article-metadata">
                     <a class="mr-2" href="{% url 'user-movies' movie.author.username %}">{{ movie.author }}</a>
