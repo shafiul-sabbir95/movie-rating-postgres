@@ -19,6 +19,8 @@ def home(request):
     }
     return render(request, 'movies/movie_list.html', context)
 
+from django.db.models import Q
+
 class MovieListView(ListView):
     model = Movie
     template_name = 'movies/movie_list.html'
@@ -32,17 +34,17 @@ class MovieListView(ListView):
         query = self.request.GET.get('search')
         
         if query:
-            context['message'] = 'You searched for: "' + query + '". ' + 'No data found for "' + query + '"!'
+            context['message'] = f'You searched for: "{query}". '
+            movies = Movie.objects.filter(Q(name__icontains=query)).order_by('-release_date')
+            if not movies:
+                context['message'] += f'No data found for "{query}"!'
         else:
             context['message'] = 'No search query provided'
         return context
 
     def get_queryset(self):
-        query = self.request.GET.get('search')
-        if query:
-            return Movie.objects.filter(Q(name__icontains=query))
-        else:
-            return Movie.objects.all()
+        return Movie.objects.all()
+
     
 class UserMovieListView(ListView):
     model = Movie
