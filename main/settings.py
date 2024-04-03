@@ -57,8 +57,6 @@ DATABASES = {
     }
 }
 
-
-# SECURITY WARNING: keep the secret key used in production secret!
 # Local Server part starts
 
 # SECRET_KEY = 'django-insecure-sorfwj7jbssj)*x47!=$!fr6ac%1z)0+$!a9i2_yd@f27@f$4a'
@@ -67,14 +65,15 @@ DATABASES = {
 
 # Local server part ends.
 
+# Render postgres part starts
+
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG", "False").lower()== "true"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 database_url = os.environ.get("DATABASE_URL")
 DATABASES["default"] = dj_database_url.parse(database_url)
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+# Render postgres part ends
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -92,8 +91,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -102,10 +99,6 @@ TIME_ZONE = 'Asia/Dhaka'
 USE_I18N = True
 
 USE_TZ = True
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -117,6 +110,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # these upper two line is required for supporting bootstrap form handling using bootstrap.
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'movie-list'
 # this is the default route for the log in, when we log in first, we will be redirected to the 'blog-home'.
