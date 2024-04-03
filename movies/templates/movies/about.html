@@ -1,0 +1,18 @@
+{% extends "movies/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'movies/about.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'sidebar/latest_posts.css' %}"> -->
+<div class="about">
+    <p id="header" class="text-primary">About Us !!!</p><br>
+    <p>Welcome to <i>RateFlix!</i> We are passionate about enhancing encouragements and knowledges of our users over various movies by associating with our community. Our mission is to establish a welcoming and inclusive community for posting various types of movies and details about the movies from our users of all around the world.</p>
+
+    <p>Our Blog site consists of <i style="color: blue; font-weight: bold">{{movie_number}}</i>  Movies, Uploaded by <i style="color: blue; font-weight: bold">{{author_number}}</i>  dedicated Movie lovers, and many contributors who share their expertise and insights on movies by rating each movie. Whether you're a beginner or an expert in movies, our goal is to provide you with a platform where you can share your thoughts, experiences, and opinions on movies by uploading one and rating it.</p>
+
+    <p>Feel free to explore our site. If you have any questions, suggestions, or feedback, please don't hesitate to <a href="{% url 'contact-us' %}"><i>"contact us"</i></a>. We'd love to hear from you!</p>
+    <p>Thank you for visiting our site <i><a href="{% url 'movie-list' %}">"RateFlix"</a></i>. We hope you enjoy your stay!</p>
+</div>
+
+
+
+{% endblock content %}

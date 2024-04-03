@@ -1,0 +1,10 @@
+{% extends "movies/base.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar/latest_posts.css' %}">
+
+    <h1 id="header">Thank you '{{name}}'<small>({{email}})</small> for your message.</h1>
+    <p id="content">We will get back to you with your text <small>"{{message}}"</small> as soon as possible</p>
+    <a class="btn btn btn-outline-info" href="{% url 'movie-list' %}">Back to Home</a>
+
+{% endblock content %}
