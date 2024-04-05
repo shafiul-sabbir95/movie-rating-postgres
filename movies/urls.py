@@ -19,4 +19,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('contact_us/', views.contact_us, name='contact-us'),
     path('contact_us_success/', views.contact_us_success, name='contact-us-success'),
+    path('rate_movie/<int:movie_id>/', views.rate_movie, name='rate_movie'),
+    path('rated-successfully/<int:movie_id>/', views.movie_rated_successfully, name='movie-rated-successfully'),
+
 ]

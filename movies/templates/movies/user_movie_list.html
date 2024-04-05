@@ -1,7 +1,7 @@
 {% extends "movies/base.html" %}
 {% block content %}
 <h1 class="mb-3">Movies uploaded by <i>{{view.kwargs.username }}</i> ( {{page_obj.paginator.count}} )</h1>
-<!-- Blog part starts -->
+{% comment %} user's movie part starts  {% endcomment %}
 <div>
     {% for movie in movies %}
     <article class="media content-section">
@@ -20,8 +20,8 @@
     </article>
 {% endfor %}
 </div>
-<!-- Blog part ends  -->
 
+{% comment %} users movie part ends {% endcomment %}
 <!-- Pagination starts -->
 <div>
     {% if is_paginated %}

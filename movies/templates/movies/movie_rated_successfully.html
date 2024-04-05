@@ -1,0 +1,9 @@
+<!-- movie_rated_successfully.html -->
+{% extends "movies/base.html" %}
+{% load static %}
+{% block content %}
+<h2>Movie Rated Successfully!</h2>
+<p>Your have rated: <b>{{ rating }}</b>  for the movie: <b>{{ movie.name }}</b></p>
+<p>Thank you for rating the movie.</p>
+<!-- Add any additional content or message here -->
+{% endblock content %}

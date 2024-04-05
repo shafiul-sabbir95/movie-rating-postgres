@@ -2,6 +2,7 @@ from typing import Any
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Movie, Rating
+from .forms import RatingForm, MovieForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.views.generic import (
@@ -66,8 +67,9 @@ class MovieDetailView(DetailView):
     
 class MovieCreateView(LoginRequiredMixin, CreateView):
     model = Movie
-    fields = ['name', 'genre', 'rating', 'release_date']
-    
+    form_class = MovieForm  # Use the MovieForm class for the form
+    template_name = 'movies/movie_form.html'  # Replace 'your_template_name.html' with your actual template name
+      
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -95,6 +97,32 @@ class MovieDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == movie.author:
             return True
         return False
+
+def rate_movie(request, movie_id):
+    movie = Movie.objects.get(pk=movie_id)
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.movie = movie
+            rating.user = request.user
+            rating = form.cleaned_data['rating']
+            rating.save()
+            return redirect('movie-rated-successfully', movie_id=movie_id)
+    else:
+        form = RatingForm()
+    return render(request, 'movies/rate_movie.html', {'form': form, 'movie': movie})
+
+def movie_rated_successfully(request, movie_id):
+    movie = Movie.objects.get(pk=movie_id)
+    rating = Rating.objects.filter(movie=movie, user=request.user).first()
+    context = {
+        'title': 'Movie Rated Successfully',
+        'movie': movie,
+        'rating': rating
+    }
+    return render(request, 'movies/movie_rated_successfully.html', context)
+
 
 def about(request):
     context = {

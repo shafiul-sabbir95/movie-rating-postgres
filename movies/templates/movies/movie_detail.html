@@ -22,6 +22,11 @@
         <p class="article-content"> <i>Movie Rating : </i>{{ object.rating }}</p>
         <p class="article-content"> <i>Informed By : </i>{{ object.author }}</p>
 
+        <form method="POST" action="{% url 'rate_movie' movie.id %}">
+            {% csrf_token %}
+            {{ rating_form.as_p }}
+            <button type="submit">Submit Rating</button>
+        </form>
     </div>
 </article>
 {% endblock content %}
